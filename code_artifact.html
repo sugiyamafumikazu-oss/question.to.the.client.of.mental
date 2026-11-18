@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>精神疾患向け 障害年金・日常生活ヒアリング項目＆等級目安シート</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .score-btn-active-1 { background-color: #ecfdf5; border-color: #059669; color: #065f46; box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.18); }
+    .score-btn-active-2 { background-color: #f0f9ff; border-color: #0284c7; color: #075985; box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.18); }
+    .score-btn-active-3 { background-color: #fffbeb; border-color: #d97706; color: #92400e; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2); }
+    .score-btn-active-4 { background-color: #fff1f2; border-color: #e11d48; color: #9f1239; box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2); }
+    .matrix-active-cell {
+      outline: 3px solid #0f766e;
+      outline-offset: -3px;
+      background-color: #ccfbf1 !important;
+      font-weight: 700;
+      position: relative;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-expand { display: block !important; }
+      body { background-color: #ffffff !important; font-size: 11pt; }
+      .print-break-avoid { break-inside: avoid; page-break-inside: avoid; }
+      .shadow-sm, .shadow, .shadow-md { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- Top Header -->
+  <header class="bg-slate-900 text-white border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-200 text-xs font-semibold tracking-wide mb-2">
+            <span>障害年金申請実務</span>
+            <span>・</span>
+            <span>診断書（精神の障害用）裏面 ⑩ウ準拠</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            精神疾患の方向け 日常生活ヒアリング項目＆等級目安シート
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            日本年金機構「診断書（精神の障害用）記載要領」・厚生労働省「精神の障害に係る等級判定ガイドライン」準拠
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 no-print">
+          <button id="btnLoadSample" type="button" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-200 transition">
+            記入例を読込
+          </button>
+          <button id="btnOpenReset" type="button" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-rose-950/70 border border-slate-700 hover:border-rose-700 text-xs font-medium text-slate-200 hover:text-rose-200 transition">
+            入力クリア
+          </button>
+          <button id="btnPrint" type="button" class="px-3.5 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-xs font-semibold text-white shadow-sm transition inline-flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/>
+            </svg>
+            <span>A4印刷 / PDF保存</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Live Status & Navigation Bar -->
+  <div class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2.5">
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl overflow-x-auto" aria-label="表示切替タブ">
+        <button type="button" data-tab="hearing" class="tab-nav-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-teal-800 shadow-sm">
+          1. ヒアリング項目一覧・記録
+        </button>
+        <button type="button" data-tab="guideline" class="tab-nav-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600 hover:text-slate-900">
+          2. 等級目安マトリクス・図解
+        </button>
+        <button type="button" data-tab="export" class="tab-nav-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600 hover:text-slate-900">
+          3. 文書出力・HTMLコード・出典
+        </button>
+      </nav>
+
+      <!-- Real-time Summary Metrics -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+          <span class="text-slate-500">入力進捗:</span>
+          <span id="statAnsweredCount" class="font-bold text-slate-800">0 / 7 項目</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+          <span class="text-slate-500">判定平均:</span>
+          <span id="statAverageScore" class="font-bold text-teal-700">—</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+          <span class="text-slate-500">能力の程度:</span>
+          <span id="statDegreeLabel" class="font-bold text-indigo-700">未選択</span>
+        </div>
+        <div id="statEstimateBadge" class="flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-900 rounded-lg px-3 py-1.5 font-bold">
+          <span>目安: 評価選択で自動算出</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+    <!-- ==================== TAB 1: HEARING ITEMS & SHEET ==================== -->
+    <section id="view-hearing" class="space-y-6">
+
+      <!-- 3 Core Principles Banner -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 print-break-avoid">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-teal-100 text-teal-800 text-xs font-bold">!</span>
+            <span>精神疾患の日常生活ヒアリング 3つの大原則（記載要領準拠）</span>
+          </h2>
+          <a href="https://www.nenkin.go.jp/shinsei/jukyu/shougai/shindansho/20140421-23.files/04-3.pdf" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-teal-700 hover:text-teal-900 underline no-print">
+            日本年金機構「記載要領」PDF ↗
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
+          <div class="rounded-xl bg-teal-50/60 border border-teal-200/80 p-3.5">
+            <p class="font-bold text-teal-950 mb-1">①「単身かつ支援なし」を仮定して聞く</p>
+            <p class="text-slate-700 leading-relaxed">
+              家族との同居や施設・グループホーム入所により日常生活が安定して見えても、<strong class="text-teal-900">「仮に一人暮らしで誰の援助もない状況だったら自力で継続できるか」</strong>を基準に聞き取ります。
+            </p>
+          </div>
+          <div class="rounded-xl bg-indigo-50/60 border border-indigo-200/80 p-3.5">
+            <p class="font-bold text-indigo-950 mb-1">② 診察当日ではなく「過去1年の波」を聞く</p>
+            <p class="text-slate-700 leading-relaxed">
+              診察室での数分間は緊張で取り繕ってしまう方が多数です。<strong class="text-indigo-900">現症日以前1年程度の好転と増悪の両方</strong>（週何日寝込むか、悪化時に何日動けないか）を具体的に数値化します。
+            </p>
+          </div>
+          <div class="rounded-xl bg-amber-50/70 border border-amber-200/80 p-3.5">
+            <p class="font-bold text-amber-950 mb-1">③ 7項目対象外の症状を切り分けて記録する</p>
+            <p class="text-slate-700 leading-relaxed">
+              身体機能障害（下肢麻痺等）、拒食・過食等の嗜癖的食行動、ギャンブル等の行為嗜癖による浪費、リストカット等の自傷・他害は7項目判定に含めず、<strong class="text-amber-900">診断書⑩ア・イ欄や⑪欄</strong>へ記載します。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prerequisite Environment & Work Hearing Card -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4 print-break-avoid">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">
+              前提条件・生活環境・就労状況のヒアリング（診断書⑩ウ1・エ・キ欄 ＆ 照会様式対応）
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              追加照会文書「<a href="https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20160715.files/C.pdf" target="_blank" rel="noopener noreferrer" class="underline text-teal-700 hover:text-teal-900">日常生活及び就労に関する状況について（照会）</a>」で審査側が確認する基礎項目です。
+            </p>
+          </div>
+          <!-- Pension Type Switcher -->
+          <div class="inline-flex items-center bg-slate-100 p-1 rounded-lg self-start sm:self-auto">
+            <button type="button" id="btnTypeKousei" class="px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-slate-900 shadow-sm">
+              障害厚生年金（1〜3級）
+            </button>
+            <button type="button" id="btnTypeKiso" class="px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+              障害基礎年金（1〜2級）
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs sm:text-sm">
+          <div>
+            <label for="inputClientName" class="block text-xs font-semibold text-slate-700 mb-1">相談者氏名・イニシャル（任意）</label>
+            <input id="inputClientName" type="text" placeholder="例：静岡 太郎 様" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+          <div>
+            <label for="selectLivingEnv" class="block text-xs font-semibold text-slate-700 mb-1">現在の生活環境（⑩ウ1(ア)）</label>
+            <select id="selectLivingEnv" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="在宅（同居あり）">在宅（同居あり）</option>
+              <option value="在宅（単身・一人暮らし）">在宅（単身・一人暮らし ※単身開始時期・理由要確認）</option>
+              <option value="施設・グループホーム入所">施設・グループホーム入所</option>
+              <option value="入院中">入院中（任意・医療保護・措置等）</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputSupporter" class="block text-xs font-semibold text-slate-700 mb-1">主な援助者・同居家族の続柄</label>
+            <input id="inputSupporter" type="text" placeholder="例：母と同居（家事・服薬管理全般）" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+          <div>
+            <label for="inputBedridden" class="block text-xs font-semibold text-slate-700 mb-1">臥床頻度・体調悪化の波</label>
+            <input id="inputBedridden" type="text" placeholder="例：週3〜4日は1日の大半を臥床" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+          <div>
+            <label for="selectWorkStatus" class="block text-xs font-semibold text-slate-700 mb-1">現症時の就労状況（⑩エ欄）</label>
+            <select id="selectWorkStatus" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="完全無職（就労していない）">完全無職（就労していない）</option>
+              <option value="休職中（傷病手当金受給等）">休職中（傷病手当金受給等）</option>
+              <option value="就労継続支援B型・生活介護">就労継続支援B型・生活介護</option>
+              <option value="就労継続支援A型・就労移行支援">就労継続支援A型・就労移行支援</option>
+              <option value="障害者雇用（配慮あり）">障害者雇用（職務・時間配慮あり）</option>
+              <option value="一般雇用（制限・配慮就労）">一般雇用（時短・配置転換・欠勤配慮等）</option>
+              <option value="自営業・在宅ワーク（制限あり）">自営業・在宅ワーク（大幅縮小・制限あり）</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputWelfare" class="block text-xs font-semibold text-slate-700 mb-1">福祉サービス・障害者手帳（⑩キ欄）</label>
+            <input id="inputWelfare" type="text" placeholder="例：精神手帳2級、訪問看護週2回" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+          <div>
+            <label for="selectAccompany" class="block text-xs font-semibold text-slate-700 mb-1">診察への家族同席・主治医伝達状況</label>
+            <select id="selectAccompany" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="本人単独受診（生活実態を十分伝えられていない）">本人単独受診（実態を十分伝えられていない）</option>
+              <option value="本人単独受診（メモ等で伝達済み）">本人単独受診（メモ等で伝達済み）</option>
+              <option value="家族が毎回または時々同席">家族が毎回または時々同席</option>
+              <option value="訪問診療・往診対応">訪問診療・往診対応</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputEnvMemo" class="block text-xs font-semibold text-slate-700 mb-1">単身理由・職場配慮・希死念慮等の補足</label>
+            <input id="inputEnvMemo" type="text" placeholder="例：週4日×4h時短検討中、運転ドクターストップ" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Toolbar for 7 ADL Items -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">
+            診断書裏面「２ 日常生活能力の判定」全7項目 ヒアリング詳細
+          </h2>
+          <p class="text-xs text-slate-600">
+            質問フレーズで深掘りし、該当する支障チェックと4段階評価（1〜4点）を選択してください。
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative">
+            <input id="inputSearchItems" type="search" placeholder="項目・キーワード検索（例：入浴、OD、役所）" class="w-64 sm:w-72 rounded-lg border border-slate-300 bg-white pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+            </svg>
+          </div>
+          <button id="btnToggleCriteria" type="button" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition">
+            記載要領の基準文言を折りたたむ
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Container for the 7 Official ADL Items -->
+      <div id="adlItemsContainer" class="space-y-5"></div>
+
+      <!-- Section 3: Overall Degree (5 Stages) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4 print-break-avoid">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">
+              診断書裏面「３ 日常生活能力の程度」（精神障害・5段階包括評価）
+            </h2>
+            <p class="text-xs text-slate-600 mt-0.5">
+              上記7場面を含めた日常生活全般における制限度合いを包括的に評価する項目です（7項目判定と整合しない場合は診断書⑪欄に理由記載が必要）。
+            </p>
+          </div>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-800 text-xs font-semibold self-start sm:self-auto">
+            該当する1つを選択
+          </span>
+        </div>
+
+        <div id="degreeOptionsContainer" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Bottom Quick Action to Tab 2 / Tab 3 -->
+      <div class="bg-slate-900 text-white rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 no-print">
+        <div>
+          <p class="text-sm font-bold">ヒアリング内容の整理・等級目安の確認はこちら</p>
+          <p class="text-xs text-slate-300 mt-0.5">
+            選択した評価とチェック項目から、ガイドライン目安表の照合および「主治医伝達用メモ」「プリエ連携テキスト」を即座に生成できます。
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button type="button" id="btnGoGuideline" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs sm:text-sm font-semibold text-white transition">
+            等級目安マトリクスを見る →
+          </button>
+          <button type="button" id="btnGoExport" class="px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs sm:text-sm font-bold transition">
+            主治医伝達メモ・HTML出力を開く →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: GUIDELINE MATRIX & VISUALIZATION ==================== -->
+    <section id="view-guideline" class="hidden space-y-6">
+
+      <!-- Top Summary Dashboard -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+          <p class="text-xs font-semibold text-slate-500">日常生活能力の判定（7項目平均）</p>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="glAvgNumber" class="text-3xl font-bold text-teal-700">—</span>
+            <span id="glAvgSub" class="text-xs text-slate-500">（未入力）</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            4段階評価を軽い方から1〜4点に置き換えた平均値です。単身生活想定での評価漏れがないか確認してください。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+          <p class="text-xs font-semibold text-slate-500">日常生活能力の程度（5段階）</p>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="glDegreeNumber" class="text-2xl font-bold text-indigo-700">未選択</span>
+          </div>
+          <p id="glDegreeText" class="text-xs text-slate-600 mt-2 leading-relaxed">
+            タブ1の下部で（1）〜（5）を選択すると、下のマトリクス表で該当セルがハイライトされます。
+          </p>
+        </div>
+
+        <div class="bg-teal-950 text-white rounded-2xl border border-teal-900 shadow-sm p-5">
+          <div class="flex items-center justify-between">
+            <p class="text-xs font-semibold text-teal-200">等級判定ガイドライン上の目安</p>
+            <span id="glPensionBadge" class="px-2 py-0.5 rounded bg-teal-800 text-teal-100 text-[11px] font-semibold">障害厚生年金</span>
+          </div>
+          <div class="mt-2">
+            <span id="glResultMain" class="text-2xl sm:text-3xl font-bold text-white">評価を選択してください</span>
+          </div>
+          <p id="glResultNote" class="text-xs text-teal-100/90 mt-2 leading-relaxed">
+            目安表は一次的な参考指標であり、最終等級は下記5分野の総合評価により認定医が判定します。
+          </p>
+        </div>
+      </div>
+
+      <!-- Official 6x5 Matrix Table + SVG Bar Chart -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Matrix Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">
+                障害等級の目安マトリクス表（厚生労働省ガイドライン第3の1）
+              </h2>
+              <p class="text-xs text-slate-500">
+                出典：<a href="https://www.mhlw.go.jp/web/t_doc?dataId=00tc2102&dataType=1" target="_blank" rel="noopener noreferrer" class="underline text-teal-700">厚生労働省「国民年金・厚生年金保険 精神の障害に係る等級判定ガイドライン」</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse border border-slate-200 text-center">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700">
+                  <th class="border border-slate-200 px-2.5 py-2.5 text-left font-bold">判定平均 ＼ 程度</th>
+                  <th class="border border-slate-200 px-2 py-2.5 font-bold">（5）<br><span class="font-normal text-[11px] text-slate-500">常時援助</span></th>
+                  <th class="border border-slate-200 px-2 py-2.5 font-bold">（4）<br><span class="font-normal text-[11px] text-slate-500">多くの援助</span></th>
+                  <th class="border border-slate-200 px-2 py-2.5 font-bold">（3）<br><span class="font-normal text-[11px] text-slate-500">時に応じ援助</span></th>
+                  <th class="border border-slate-200 px-2 py-2.5 font-bold">（2）<br><span class="font-normal text-[11px] text-slate-500">社会生活援助</span></th>
+                  <th class="border border-slate-200 px-2 py-2.5 font-bold">（1）<br><span class="font-normal text-[11px] text-slate-500">社会生活普通</span></th>
+                </tr>
+              </thead>
+              <tbody id="guidelineMatrixBody"></tbody>
+            </table>
+          </div>
+
+          <div class="mt-3 space-y-1 text-[11px] text-slate-600 leading-relaxed">
+            <p>※1 障害基礎年金を認定する場合、表内の「3級」は「2級非該当」と置き換えます（上部の年金種別切替に連動）。</p>
+            <p>※2 「—」（斜線・空欄）の組み合わせは「日常生活能力の程度」と「判定」に齟齬がある状態となるため、診断書⑪欄（現症時の日常生活活動能力及び労働能力）での具体的な理由記載が不可欠です。</p>
+          </div>
+        </div>
+
+        <!-- SVG 7-Item Profile Chart -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base font-bold text-slate-900 mb-1">
+              7項目の制限バランス可視化（1〜4点）
+            </h2>
+            <p class="text-xs text-slate-500 mb-3">
+              判定平均が低い場合でも、特定項目に著しい偏り（3〜4点）があり生活に大きな支障がある場合は総合評価で考慮されます。
+            </p>
+            <div id="svgChartWrapper" class="w-full"></div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap gap-2 text-[11px] text-slate-600">
+            <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>1点: できる</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>2点: 時に助言</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>3点: 助言あれば可</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>4点: できない</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Comprehensive Evaluation Factors -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <h2 class="text-base font-bold text-slate-900 mb-1">
+          総合評価の際に考慮すべき5分野のヒアリング確認ポイント（ガイドライン第3の2）
+        </h2>
+        <p class="text-xs text-slate-600 mb-4">
+          目安表が「1級又は2級」「2級又は3級」「3級又は非該当」など複数にまたがる場合、認定医は以下の5分野を総合評価して決定します。
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+          <div class="rounded-xl border border-slate-200 p-3.5 bg-slate-50/60">
+            <p class="font-bold text-slate-900 mb-1.5">① 現在の病状又は状態像（⑩ア・イ欄）</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+              <li>複数精神疾患の併存時は併合せず諸症状を総合判断</li>
+              <li>精神障害の病状による継続的な「ひきこもり」の有無</li>
+              <li>気分障害：病相期間・頻度・最近1年の変動・希死念慮</li>
+              <li>統合失調症：幻覚妄想等の異常体験や陰性症状（自閉・意欲減退）</li>
+              <li>発達障害：高IQでも対人・意思疎通困難や感覚過敏（光・音・臭気等）の有無</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-slate-200 p-3.5 bg-slate-50/60">
+            <p class="font-bold text-slate-900 mb-1.5">② 療養状況（⑨エ・⑩イ欄）</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+              <li>通院頻度、薬物療法の種類・量・期間・副作用の影響</li>
+              <li>通院や服薬が困難・不可能な場合はその理由と代替療養状況</li>
+              <li>入院歴（医療保護入院・措置入院等）や病棟内での常時個別援助</li>
+              <li>在宅での家族や重度訪問介護・訪問看護による常時援助の実態</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-slate-200 p-3.5 bg-slate-50/60">
+            <p class="font-bold text-slate-900 mb-1.5">③ 生活環境（⑩ウ1・キ欄）</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+              <li>家族等の日常生活上の援助内容・頻度、障害福祉サービスの利用状況</li>
+              <li>同居や施設で安定していても「単身生活と仮定した時に必要な支援」</li>
+              <li>単身生活者の場合、実質的に誰のどのような支援で生活が成り立っているか</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-slate-200 p-3.5 bg-slate-50/60">
+            <p class="font-bold text-slate-900 mb-1.5">④ 就労状況（⑩エ・⑪欄）</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+              <li>就労の事実のみで直ちに日常生活能力向上とは捉えない</li>
+              <li>障害者雇用・A型・B型・移行支援か、一般雇用での大幅な配慮・援助があるか</li>
+              <li>業務内容（単純反復か）、意思疎通状況、欠勤・早退・休職の頻度</li>
+              <li>就労の影響で帰宅後・休日の日常生活能力が著しく低下していないか（⑪欄）</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-slate-200 p-3.5 bg-slate-50/60 md:col-span-2">
+            <p class="font-bold text-slate-900 mb-1.5">⑤ その他（発育・教育歴・手帳・偏り）</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+              <li>「日常生活能力の程度」と「判定」にズレがある場合の具体的背景（⑪欄）</li>
+              <li>判定平均が低くても、特定項目に著しい偏りがあり実生活に大きな支障がある状況</li>
+              <li>発達障害・知的障害における幼少期の状況、特別支援教育歴、精神障害者保健福祉手帳・療育手帳の区分</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: EXPORT, HTML CODE & SOURCES ==================== -->
+    <section id="view-export" class="hidden space-y-6">
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">
+              実務出力テキスト＆単体HTMLコード生成
+            </h2>
+            <p class="text-xs text-slate-600 mt-0.5">
+              ヒアリング結果に応じた文書出力のほか、社内WikiやWebページへそのまま貼り付けられるHTMLコードもワンクリックでコピーできます。
+            </p>
+          </div>
+          <button id="btnCopyOutput" type="button" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs sm:text-sm font-bold shadow-sm transition inline-flex items-center gap-1.5 self-start md:self-auto">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            <span>表示中の内容をコピー</span>
+          </button>
+        </div>
+
+        <!-- Output Format Sub-tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button type="button" data-fmt="doctor" class="fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-teal-50 border-teal-600 text-teal-900">
+            ① 主治医伝達・面談サマリー用メモ
+          </button>
+          <button type="button" data-fmt="prehe" class="fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-white border-slate-300 text-slate-700 hover:bg-slate-50">
+            ② プリエ（PRehe）入力連携用テキスト
+          </button>
+          <button type="button" data-fmt="questionnaire" class="fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-white border-slate-300 text-slate-700 hover:bg-slate-50">
+            ③ 相談者送付用 事前ヒアリング質問票
+          </button>
+          <button type="button" data-fmt="htmlcode" class="fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-white border-slate-300 text-slate-700 hover:bg-slate-50">
+            ④ ヒアリング項目一覧 HTMLソースコード
+          </button>
+        </div>
+
+        <div>
+          <label for="outputTextarea" class="sr-only">出力内容</label>
+          <textarea id="outputTextarea" rows="18" readonly class="w-full rounded-xl border border-slate-300 bg-slate-950 text-slate-100 font-mono text-xs leading-relaxed p-4 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+        </div>
+      </div>
+
+      <!-- Verified Official Sources Card -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <h2 class="text-base font-bold text-slate-900 mb-3">
+          根拠法令・日本年金機構／厚生労働省 公式一次資料リンク
+        </h2>
+        <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700">
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・診断書（精神の障害用）記載要領：</span>
+            <a href="https://www.nenkin.go.jp/shinsei/jukyu/shougai/shindansho/20140421-23.files/04-3.pdf" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              日本年金機構「障害年金の診断書（精神の障害用）記載要領 ～記載にあたって留意していただきたいポイント～」（PDF）
+            </a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・精神の障害に係る等級判定ガイドライン（日本年金機構案内）：</span>
+            <a href="https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20160715.html" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              日本年金機構『国民年金・厚生年金保険 精神の障害に係る等級判定ガイドライン』等
+            </a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・等級判定ガイドライン通知本文（厚生労働省法令等DB）：</span>
+            <a href="https://www.mhlw.go.jp/web/t_doc?dataId=00tc2102&dataType=1" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              厚生労働省「国民年金・厚生年金保険 精神の障害に係る等級判定ガイドラインの実施等について」
+            </a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・追加照会様式（日常生活及び就労に関する状況）：</span>
+            <a href="https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20160715.files/C.pdf" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              日本年金機構「日常生活及び就労に関する状況について（照会）」（PDF）
+            </a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・障害認定基準（第8節 精神の障害）：</span>
+            <a href="https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20140604.html" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              日本年金機構「国民年金・厚生年金保険 障害認定基準」
+            </a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span class="font-semibold text-slate-900 shrink-0">・診断書作成医向け総合ページ：</span>
+            <a href="https://www.nenkin.go.jp/shinsei/jukyu/shougai/shindansho/sakusei.html" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 underline break-all">
+              日本年金機構「障害年金の診断書を作成する医師の方へ」
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- In-page Confirmation Modal for Reset (No window.confirm) -->
+  <div id="resetModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 no-print" role="dialog" aria-modal="true" aria-labelledby="resetModalTitle">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-md w-full p-6 space-y-4">
+      <h3 id="resetModalTitle" class="text-base font-bold text-slate-900">入力内容をリセットしますか？</h3>
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+        選択した7項目の点数・支障チェック・エピソードメモ・生活環境の入力内容がすべて初期状態に戻ります。
+      </p>
+      <div class="flex items-center justify-end gap-2.5 pt-2">
+        <button id="btnCancelReset" type="button" class="px-4 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700">
+          キャンセル
+        </button>
+        <button id="btnConfirmReset" type="button" class="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs font-semibold text-white">
+          すべてクリアする
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-lg border border-slate-700 no-print">
+    <span id="toastMessage">コピーしました</span>
+  </div>
+
+  <script>
+    // =========================================================================
+    // Grounded Dataset: Official 7 ADL Items & 5-Stage Degree (Japan Pension Service)
+    // =========================================================================
+    const ADL_ITEMS = [
+      {
+        id: 1,
+        code: '（1）',
+        shortName: '適切な食事',
+        preheKey: '適切な食事',
+        title: '（1）適切な食事',
+        definition: '配膳などの準備も含めて適当量をバランスよく摂ることがほぼできるなど。',
+        exclusionNote: '※嗜癖的な食行動（拒食症や過食症など）をもって直ちに「食べられない」とは評価しません（病状欄⑩ア・イで補足）。',
+        ngQuestion: '「毎日ご飯は食べられていますか？」（※家族が作った食事を食べているだけでも「はい」と答えてしまい過大評価の原因になります）',
+        okQuestion: '「もし一人暮らしだったら、自分で献立を考え、買い物・調理・配膳・後片付けまで栄養バランスを考えて毎日続けられますか？ 家族の用意がない日は何を食べていますか？」',
+        checkpoints: [
+          '献立・調理・配膳・後片付けをすべて同居家族や施設に頼っている',
+          '一人だと菓子パン・カップ麺・ゼリー飲料など同じものばかり食べる',
+          '意欲低下で空腹でも準備ができず、1日1食以下や抜食になる日がある',
+          '昼夜逆転や体調の波で食事時間が極端に不規則になっている',
+          '火や包丁を使う調理が億劫・危険で自炊ができない',
+          '食べ終わった食器や容器を片付けられずシンクや自室に溜まる',
+          '家族の声かけや見守りがないと食事を摂らない・または過食になる',
+          '偏食・不食・過食により大幅な体重増減や栄養状態の悪化がある'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '栄養のバランスを考え適当量の食事を適時にとることができる。（外食、自炊、家族・施設からの提供を問わない）' },
+          { score: 2, label: '自発的にできるが時には助言や指導を必要とする', desc: 'だいたいは自主的に適当量の食事を栄養のバランスを考え適時にとることができるが、時に食事内容が貧しかったり不規則になったりするため、家族や施設からの提供、助言や指導を必要とする場合がある。' },
+          { score: 3, label: '自発的かつ適正に行うことはできないが助言や指導があればできる', desc: '1人では、いつも同じものばかりを食べたり、食事内容が極端に貧しかったり、いつも過食になったり、不規則になったりするため、経常的な助言や指導を必要とする。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '常に食事へ目を配っておかないと不食、偏食、過食などにより健康を害するほどに適切でない食行動になるため、常時の援助が必要である。' }
+        ]
+      },
+      {
+        id: 2,
+        code: '（2）',
+        shortName: '身辺の清潔保持',
+        preheKey: '身辺の清潔保持',
+        title: '（2）身辺の清潔保持',
+        definition: '洗面、洗髪、入浴等の身体の衛生保持や着替え等ができる。また、自室の清掃や片付けができる、TPOに合った服装ができるなど。',
+        exclusionNote: '※身体機能障害による入浴動作困難は対象外。能力はあっても精神症状（意欲減退・強迫等）により自発的・適正に行えない状態を確認します。',
+        ngQuestion: '「一人でお風呂に入ったり着替えたりできますか？」（※身体的な動作の可否と誤解されやすい質問です）',
+        okQuestion: '「誰にも促されずに自発的に週何回お風呂・洗髪・歯磨きができていますか？ 季節や外出先に合った服選び、自室の掃除やゴミ出しはどうですか？」',
+        checkpoints: [
+          '入浴・シャワーが週1〜2回以下（または数日〜1週間以上入れない）',
+          '家族から再三の声かけや湯張り等の準備がないと入浴できない',
+          '洗髪・洗面・歯磨き・ひげ剃り・爪切りが数日以上できないことが多い',
+          'パジャマや同じ下着・衣服を何日も着替えずに過ごし続ける',
+          '季節・気温やTPO（時間・場所・状況）に合った服装が選べない',
+          '自室の掃除や片付けが自発的にできず、ゴミや物が散乱している',
+          '洗濯物を洗う・干す・取り込む・たたむ一連の家事ができない',
+          '強迫症状等により長時間の過剰な手洗い・入浴を繰り返し消耗する'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '洗面、整髪、ひげ剃り、入浴、着替え等の身体の清潔を保つことが自主的に問題なく行える。必要に応じて（週に1回くらいは）、自主的に掃除や片付けができる。また、TPOに合った服装ができる。' },
+          { score: 2, label: '自発的にできるが時には助言や指導を必要とする', desc: '身体の清潔を保つことが、ある程度自主的に行える。回数は少ないが、だいたいは自室の清掃や片付けが自主的に行える。身体の清潔を保つためには、週1回程度の助言や指導を必要とする。' },
+          { score: 3, label: '自発的かつ適正に行うことはできないが助言や指導があればできる', desc: '身体の清潔を保つためには、経常的な助言や指導を必要とする。自室の清掃や片付けを自主的にはせず、いつも部屋が乱雑になるため、経常的な助言や指導を必要とする。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '常時支援をしても身体の清潔を保つことができなかったり、自室の清掃や片付けをしないか、できない。' }
+        ]
+      },
+      {
+        id: 3,
+        code: '（3）',
+        shortName: '金銭管理と買い物',
+        preheKey: '金銭管理・買い物',
+        title: '（3）金銭管理と買い物',
+        definition: '金銭を独力で適切に管理し、やりくりがほぼできる。また、一人で買い物が可能であり、計画的な買い物がほぼできるなど。',
+        exclusionNote: '※行為嗜癖に属する浪費（ギャンブル依存等）や強迫的消費行動は本項目では評価せず、病状欄で整理します。',
+        ngQuestion: '「コンビニやネットで買い物はできますか？」（※決まった1品を買うだけでも「できる」と答えてしまいます）',
+        okQuestion: '「1か月分の収入・生活費を自分で予算立てして月末までやりくりできますか？ 通帳管理は誰がしていますか？ 必要な日用品・食材を一人で計画的に買い出しできますか？」',
+        checkpoints: [
+          '通帳・キャッシュカード・財布を家族が管理し、数日分ずつ手渡しされている',
+          '1か月の収支見通しが立てられず、手元にお金があるとすぐ使い果たす',
+          '躁状態や衝動性により不要な高額商品やネット通販で収入以上の出費をする',
+          '家賃・光熱費・通信費・税金等の支払い期限管理や振込ができない',
+          'スーパー等の人混み・レジ待ち・音や光で体調が悪化し一人で買い物に行けない',
+          '在庫確認ができず同じ物を何個も買ったり、メモがないと買い物できない',
+          'レジでの暗算や金銭授受で混乱・パニックになりやすい',
+          'やりくりができず親族からの仕送り・立替等の経済的援助が不可欠'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '金銭を独力で適切に管理し、1ヵ月程度のやりくりが自分でできる。また、1人で自主的に計画的な買い物ができる。' },
+          { score: 2, label: 'おおむねできるが時には助言や指導を必要とする', desc: '1週間程度のやりくりはだいたい自分でできるが、時に収入を超える出費をしてしまうため、時として助言や指導を必要とする。' },
+          { score: 3, label: '助言や指導があればできる', desc: '1人では金銭の管理が難しいため、3〜4日に一度手渡して買い物に付き合うなど、経常的な援助を必要とする。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '持っているお金をすぐに使ってしまうなど、金銭の管理が自分ではできない、あるいは行おうとしない。' }
+        ]
+      },
+      {
+        id: 4,
+        code: '（4）',
+        shortName: '通院と服薬',
+        preheKey: '通院と服薬',
+        title: '（4）通院と服薬',
+        definition: '規則的に通院や服薬を行い、病状等を主治医に伝えることができるなど。',
+        exclusionNote: '※通院実績があっても「家族の予約管理・送迎・診察同席・ピルケース管理」で成り立っている場合は自発的とは言えません。',
+        ngQuestion: '「定期的にお医者さんへ通って薬を飲んでいますか？」',
+        okQuestion: '「予約日の把握、病院までの移動、診察室で過去1か月の辛い症状や副作用を医師に伝えることは一人でできていますか？ 薬の飲み忘れは週に何回くらいありますか？」',
+        checkpoints: [
+          '予約日を忘れるため家族がカレンダー管理や当日の声かけをしている',
+          '一人では外出・移動できず家族等の送迎や付き添いがないと通院できない',
+          '体調悪化や意欲低下により予約日に受診できないことが時々ある',
+          '薬の飲み忘れが週2回以上ある（朝起きられず朝の薬が飲めない等を含む）',
+          'お薬カレンダーやピルケースへの仕分け・服薬確認を家族や訪問看護が行っている',
+          '自己判断での断薬（拒薬）、飲み方の間違い、過量服薬（OD）をしたことがある',
+          '診察室で緊張や思考制止が起こり、自分の病状や副作用を主治医に伝えられない',
+          '主治医からの説明や指示を記憶・理解できず家族の同席フォローが必要'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '通院や服薬の必要性を理解し、自発的かつ規則的に通院・服薬ができる。また、病状や副作用について、主治医に伝えることができる。' },
+          { score: 2, label: 'おおむねできるが時には助言や指導を必要とする', desc: '自発的な通院・服薬はできるものの、時に病院に行かなかったり、薬の飲み忘れがある（週に2回以上）ので、助言や指導を必要とする。' },
+          { score: 3, label: '助言や指導があればできる', desc: '飲み忘れや、飲み方の間違い、拒薬、大量服薬をすることがしばしばあるため、経常的な援助を必要とする。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '常時の援助をしても通院・服薬をしないか、できない。' }
+        ]
+      },
+      {
+        id: 5,
+        code: '（5）',
+        shortName: '意思伝達・対人関係',
+        preheKey: '対人関係',
+        title: '（5）他人との意思伝達及び対人関係',
+        definition: '他人の話を聞く、自分の意思を相手に伝える、集団的行動が行えるなど。',
+        exclusionNote: '※1対1や集団の場面でのコミュニケーション能力および他者と適切に付き合う能力に着目します（同居家族とだけ話せても「できる」には該当しません）。',
+        ngQuestion: '「ご家族と会話はできますか？」',
+        okQuestion: '「ご家族以外の第三者（近所・職場・店員など）と問題なく会話や人間関係を続けられていますか？ 相手の言動に過敏に傷ついたり、集団から孤立したりしていませんか？」',
+        checkpoints: [
+          '同居家族や医療・福祉関係者以外との交流がほとんどなく社会的に孤立している',
+          '発病後に友人関係が途絶え、自分から友人をつくり継続して付き合うことができない',
+          '電話の着信・LINE通知・インターホンに強い恐怖や不安があり応答できない',
+          '会話が挨拶や最低限の事務連絡にとどまり、臨機応変なやり取りができない',
+          '他人の視線や何気ない一言を被害的・否定的に受け取りパニックや不調に陥る',
+          '相手の気持ちや場の空気を読めず、一方的な多弁や配慮を欠いた言動でトラブルになる',
+          '複数人や集団の場面に入ると極度の緊張・疲労・混乱が生じ参加できない',
+          '思考がまとまらず、困っていることや自分の意思を他者に言葉で伝えられない'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '近所、仕事場等で、挨拶など最低限の人づきあいが自主的に問題なくできる。必要に応じて、誰に対しても自分から話せる。友人を自分からつくり、継続して付き合うことができる。' },
+          { score: 2, label: 'おおむねできるが時には助言や指導を必要とする', desc: '最低限の人づきあいはできるものの、コミュニケーションが挨拶や事務的なことにとどまりがちで、友人を自分からつくり継続して付き合うには時として助言や指導を必要とする。あるいは助言がなければ周囲に配慮を欠いた行動をとることがある。' },
+          { score: 3, label: '助言や指導があればできる', desc: '他者とのコミュニケーションがほとんどできず、近所や集団から孤立しがちである。友人を自分からつくり継続して付き合うことができず、あるいは周囲への配慮を欠いた行動がたびたびあるため、助言や指導を必要とする。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '助言や指導をしても他者とコミュニケーションができないか、あるいはしようとしない。また、隣近所・集団との付き合い・他者との協調性がみられず、友人等とのつきあいがほとんどなく、孤立している。' }
+        ]
+      },
+      {
+        id: 6,
+        code: '（6）',
+        shortName: '安全保持・危機対応',
+        preheKey: '危険回避',
+        title: '（6）身辺の安全保持及び危機対応',
+        definition: '事故等の危険から身を守る能力がある、通常と異なる事態となった時に他人に援助を求めるなどを含めて、適正に対応することができるなど。',
+        exclusionNote: '※リストカット等の自傷行為や他害行為は本項目の評価対象に含めず、診断書表面⑩ア欄・イ欄に具体的に記載します。',
+        ngQuestion: '「これまでに火事や大きな事故を起こしたことはありますか？」',
+        okQuestion: '「コンロの火の消し忘れや鍵の閉め忘れ、薬の眠気等による運転中止、災害や急なトラブルが起きた時にパニックになって動けなくなることはありませんか？」',
+        checkpoints: [
+          'ガスコンロの火の消し忘れ・鍋の空焚き・電子レンジの発煙など火元の不始末がある',
+          '包丁等の刃物の片付け忘れや怪我、不注意による転倒・物損が頻回にある',
+          '玄関の施錠忘れ、水道や暖房器具の消し忘れがたびたびある',
+          '注意力低下・ふらつき・薬の副作用等により自動車の運転を医師から止められている',
+          '外出時に周囲の車や信号への注意が散漫になり飛び出し等の危険がある',
+          '地震・火災・急病・交通トラブルなど非日常の事態でパニックになり固まってしまう',
+          '緊急時や困った場面で周囲の人に助けを求めたり避難指示に従って行動できない',
+          '判断力低下により悪質商法・詐欺・対人搾取などの危険から自分の身を守れない'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '道具や乗り物などの危険性を理解・認識しており、事故等がないよう適切な使い方・利用ができる。また、通常と異なる事態となった時（火事や地震など）に他人に援助を求めたり指導に従って行動するなど適正に対応できる。' },
+          { score: 2, label: 'おおむねできるが時には助言や指導を必要とする', desc: '道具や乗り物などの危険性を理解・認識しているが、時々適切な使い方・利用ができないことがある（ガスコンロの火を消し忘れる、使用した刃物を片付ける配慮を忘れる等）。また通常と異なる事態に他人に援助を求めたり指示に従って行動できない時がある。' },
+          { score: 3, label: '助言や指導があればできる', desc: '道具や乗り物などの危険性を十分に理解・認識できておらず、危険に注意を払うことができなかったり頻回に忘れてしまう。また、通常と異なる事態となった時にパニックになり、他人に援助を求めたり指示に従って適正に対応できないことが多い。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '道具や乗り物などの危険性を理解・認識しておらず、周囲の助言や指導があっても適切な使い方・利用ができない、あるいはしようとしない。また、通常と異なる事態に適正に対応することができない。' }
+        ]
+      },
+      {
+        id: 7,
+        code: '（7）',
+        shortName: '社会性',
+        preheKey: '社会性',
+        title: '（7）社会性',
+        definition: '銀行での金銭の出し入れや公共施設等の利用が一人で可能。また、社会生活に必要な手続きが行えるなど。',
+        exclusionNote: '※ATMの単純操作だけでなく、役所・銀行窓口での届出や、交通機関の遅延・ルール変更時にパニックにならず対応できるかを確認します。',
+        ngQuestion: '「ATMでお金をおろしたり、電車に乗ったりしたことはありますか？」',
+        okQuestion: '「市役所や年金・保険の窓口手続き、銀行手続きを書類記入から一人で完結できますか？ 電車やバスの遅延・急なルール変更が起きた時に対応できますか？」',
+        checkpoints: [
+          '市役所・年金事務所・ハローワーク等の行政手続きや申請書類の記入が一人でできない',
+          '銀行窓口での手続きや、電気・ガス・水道・携帯電話等の契約・解約手続きができない',
+          '役所や金融機関からの重要郵便物を開封・確認できず放置してしまう',
+          '公共交通機関（電車・バス）に一人で乗ることができない',
+          '習慣化した路線は乗れても、遅延・運休・急な予定変更があるとパニックになる',
+          '窓口やレジでの順番待ちができず、途中で帰宅したりトラブルになったりする',
+          '公共施設や集団の場での暗黙のルール・手順が理解できず周囲に合わせられない',
+          '社会生活上の諸手続きはすべて家族や支援者が同行または代行している'
+        ],
+        levels: [
+          { score: 1, label: 'できる', desc: '社会生活に必要な手続き（行政機関の各種届出や銀行での金銭の出し入れ等）や公共施設・交通機関の利用にあたって、基本的なルールを理解し、周囲の状況に合わせて適切に行動できる。' },
+          { score: 2, label: 'おおむねできるが時には助言や指導を必要とする', desc: '社会生活に必要な手続きや公共施設・交通機関の利用について、習慣化されたものであればおおむねできる。だが、急にルールが変わったりすると、適正に対応することができないことがある。' },
+          { score: 3, label: '助言や指導があればできる', desc: '社会生活に必要な手続きや公共施設・交通機関の利用にあたって、各々の目的や基本的なルールの理解が不十分であり、経常的な助言や指導がなければ、ルールを守り周囲の状況に合わせた行動ができない。' },
+          { score: 4, label: '助言や指導をしてもできない若しくは行わない', desc: '社会生活に必要な手続きや公共施設・交通機関の利用にあたって、その目的や基本的なルールを理解できない、あるいはしようとしない。そのため、助言・指導などの支援をしても適切な行動ができない、あるいはしようとしない。' }
+        ]
+      }
+    ];
+
+    const DEGREE_OPTIONS = [
+      {
+        value: 1,
+        code: '（1）',
+        title: '精神障害（病的体験・残遺症状・認知障害・性格変化等）を認めるが、社会生活は普通にできる。',
+        detail: '7項目の行動が自発的・適切にでき、精神障害を持たない人と同じように日常生活及び社会生活を送ることができる状態。'
+      },
+      {
+        value: 2,
+        code: '（2）',
+        title: '精神障害を認め、家庭内での日常生活は普通にできるが、社会生活には、援助が必要である。',
+        detail: '概ね自発的にできるが時に支援が必要。日常的な家事はこなせるが状況・手順が変化すると困難が生じる。過大なストレスで対処困難となるが金銭管理は概ねできる状態。'
+      },
+      {
+        value: 3,
+        code: '（3）',
+        title: '精神障害を認め、家庭内での単純な日常生活はできるが、時に応じて援助が必要である。',
+        detail: '習慣化された外出（通院等）は自らできるがストレス状況への対処が困難。家事に助言等の支援が必要、清潔保持が自発的・適切にできない、対人交流が乏しい・ひきこもり、金銭管理ができない場合がある状態。'
+      },
+      {
+        value: 4,
+        code: '（4）',
+        title: '精神障害を認め、日常生活における身のまわりのことも、多くの援助が必要である。',
+        detail: '7項目のことは経常的な援助がなければできない。家族・医療福祉関係者以外に親しい人がいない、自発性が著しく乏しい、行動のテンポが大きく隔たる、些細な出来事で再燃・悪化しやすい、金銭管理が困難な状態。'
+      },
+      {
+        value: 5,
+        code: '（5）',
+        title: '精神障害を認め、身のまわりのこともほとんどできないため、常時の援助が必要である。',
+        detail: '援助があってもほとんどできない。入院・入所では病棟・施設内で常時個別の援助を要し、在宅では通院等の外出に付き添いや往診が必要で、食事用意・後片付け・清潔保持も自発的に行えず常時の援助を要する状態。'
+      }
+    ];
+
+    // Official MHLW Matrix: rows ordered from top (3.5+) to bottom (<1.5), columns [5, 4, 3, 2, 1]
+    const GUIDELINE_MATRIX = [
+      { rowIndex: 0, label: '3.5以上（3.5〜4.0）', min: 3.5, max: 4.01, cells: { 5: '1級', 4: '1級又は2級', 3: '', 2: '', 1: '' } },
+      { rowIndex: 1, label: '3.0以上 3.5未満', min: 3.0, max: 3.5, cells: { 5: '1級又は2級', 4: '2級', 3: '2級', 2: '', 1: '' } },
+      { rowIndex: 2, label: '2.5以上 3.0未満', min: 2.5, max: 3.0, cells: { 5: '', 4: '2級', 3: '2級又は3級', 2: '', 1: '' } },
+      { rowIndex: 3, label: '2.0以上 2.5未満', min: 2.0, max: 2.5, cells: { 5: '', 4: '2級', 3: '2級又は3級', 2: '3級又は3級非該当', 1: '' } },
+      { rowIndex: 4, label: '1.5以上 2.0未満', min: 1.5, max: 2.0, cells: { 5: '', 4: '', 3: '3級', 2: '3級又は3級非該当', 1: '' } },
+      { rowIndex: 5, label: '1.5未満（1.0〜1.4）', min: 1.0, max: 1.5, cells: { 5: '', 4: '', 3: '', 2: '3級非該当', 1: '3級非該当' } }
+    ];
+
+    const STORAGE_KEY = 'dp_mental_hearing_state_v1';
+
+    function createEmptyState() {
+      const items = {};
+      ADL_ITEMS.forEach(function(item) {
+        items[item.id] = { score: null, checked: [], memo: '' };
+      });
+      return {
+        activeTab: 'hearing',
+        exportFormat: 'doctor',
+        pensionType: 'kousei',
+        searchQuery: '',
+        showCriteria: true,
+        profile: {
+          clientName: '',
+          livingEnv: '在宅（同居あり）',
+          supporter: '',
+          bedridden: '',
+          workStatus: '完全無職（就労していない）',
+          welfare: '',
+          accompany: '本人単独受診（生活実態を十分伝えられていない）',
+          envMemo: ''
+        },
+        items: items,
+        degree: null
+      };
+    }
+
+    let state = createEmptyState();
+
+    // Load saved state safely
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          state.pensionType = parsed.pensionType === 'kiso' ? 'kiso' : 'kousei';
+          state.showCriteria = parsed.showCriteria !== false;
+          if (parsed.profile) {
+            Object.assign(state.profile, parsed.profile);
+          }
+          if (parsed.items) {
+            ADL_ITEMS.forEach(function(item) {
+              if (parsed.items[item.id]) {
+                state.items[item.id] = {
+                  score: parsed.items[item.id].score || null,
+                  checked: Array.isArray(parsed.items[item.id].checked) ? parsed.items[item.id].checked : [],
+                  memo: parsed.items[item.id].memo || ''
+                };
+              }
+            });
+          }
+          state.degree = parsed.degree || null;
+        }
+      } catch (e) {
+        // Ignore storage errors in sandboxed contexts
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Ignore storage errors in sandboxed contexts
+      }
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      const label = document.getElementById('toastMessage');
+      label.textContent = msg;
+      banner.classList.remove('hidden');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        banner.classList.add('hidden');
+      }, 2600);
+    }
+
+    function formatCellForPensionType(rawText, pensionType) {
+      if (!rawText) return '—';
+      if (pensionType === 'kousei') return rawText;
+      if (rawText === '3級') return '2級非該当';
+      if (rawText === '3級非該当') return '2級非該当';
+      if (rawText === '3級又は3級非該当') return '2級非該当';
+      if (rawText === '2級又は3級') return '2級又は2級非該当';
+      return rawText;
+    }
+
+    function calculateMetrics() {
+      let sum = 0;
+      let count = 0;
+      ADL_ITEMS.forEach(function(item) {
+        const s = state.items[item.id].score;
+        if (s !== null && s >= 1 && s <= 4) {
+          sum += s;
+          count += 1;
+        }
+      });
+      const avg = count > 0 ? (sum / count) : null;
+      let rowIndex = null;
+      if (avg !== null) {
+        for (let i = 0; i < GUIDELINE_MATRIX.length; i++) {
+          const r = GUIDELINE_MATRIX[i];
+          if (avg >= r.min && avg < r.max) {
+            rowIndex = r.rowIndex;
+            break;
+          }
+        }
+      }
+      let rawEstimate = null;
+      let formattedEstimate = null;
+      let isDiscrepancy = false;
+      if (rowIndex !== null && state.degree !== null) {
+        rawEstimate = GUIDELINE_MATRIX[rowIndex].cells[state.degree];
+        if (!rawEstimate) {
+          isDiscrepancy = true;
+          formattedEstimate = '判定と程度の整合確認が必要（⑪欄補足）';
+        } else {
+          formattedEstimate = formatCellForPensionType(rawEstimate, state.pensionType);
+        }
+      }
+      return {
+        count: count,
+        sum: sum,
+        avg: avg,
+        rowIndex: rowIndex,
+        rawEstimate: rawEstimate,
+        formattedEstimate: formattedEstimate,
+        isDiscrepancy: isDiscrepancy
+      };
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // =========================================================================
+    // Render Functions
+    // =========================================================================
+    function syncProfileInputs() {
+      document.getElementById('inputClientName').value = state.profile.clientName;
+      document.getElementById('selectLivingEnv').value = state.profile.livingEnv;
+      document.getElementById('inputSupporter').value = state.profile.supporter;
+      document.getElementById('inputBedridden').value = state.profile.bedridden;
+      document.getElementById('selectWorkStatus').value = state.profile.workStatus;
+      document.getElementById('inputWelfare').value = state.profile.welfare;
+      document.getElementById('selectAccompany').value = state.profile.accompany;
+      document.getElementById('inputEnvMemo').value = state.profile.envMemo;
+
+      const btnKousei = document.getElementById('btnTypeKousei');
+      const btnKiso = document.getElementById('btnTypeKiso');
+      if (state.pensionType === 'kousei') {
+        btnKousei.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-slate-900 shadow-sm';
+        btnKiso.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+      } else {
+        btnKiso.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-slate-900 shadow-sm';
+        btnKousei.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+      }
+
+      const btnToggle = document.getElementById('btnToggleCriteria');
+      btnToggle.textContent = state.showCriteria ? '記載要領の基準文言を折りたたむ' : '記載要領の基準文言を展開する';
+    }
+
+    function renderAdlCards() {
+      const container = document.getElementById('adlItemsContainer');
+      const query = state.searchQuery.trim().toLowerCase();
+
+      const filtered = ADL_ITEMS.filter(function(item) {
+        if (!query) return true;
+        const haystack = [
+          item.title,
+          item.definition,
+          item.exclusionNote,
+          item.ngQuestion,
+          item.okQuestion,
+          item.checkpoints.join(' '),
+          item.levels.map(function(l) { return l.label + ' ' + l.desc; }).join(' ')
+        ].join(' ').toLowerCase();
+        return haystack.indexOf(query) !== -1;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm text-slate-500">検索条件に一致するヒアリング項目がありません。キーワードを変更してください。</div>';
+        return;
+      }
+
+      const badgeColors = {
+        1: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+        2: 'bg-sky-100 text-sky-800 border-sky-300',
+        3: 'bg-amber-100 text-amber-900 border-amber-300',
+        4: 'bg-rose-100 text-rose-900 border-rose-300'
+      };
+
+      const htmlParts = filtered.map(function(item) {
+        const itemState = state.items[item.id];
+        const selectedScore = itemState.score;
+        const statusBadge = selectedScore
+          ? '<span class="px-2.5 py-1 rounded-full border text-xs font-bold ' + badgeColors[selectedScore] + '">評価: ' + selectedScore + '点</span>'
+          : '<span class="px-2.5 py-1 rounded-full border border-slate-200 bg-slate-100 text-slate-500 text-xs font-medium">未評価</span>';
+
+        const checkpointsHtml = item.checkpoints.map(function(cp, idx) {
+          const isChecked = itemState.checked.indexOf(cp) !== -1;
+          const checkId = 'cp_' + item.id + '_' + idx;
+          return (
+            '<label for="' + checkId + '" class="flex items-start gap-2.5 p-2.5 rounded-xl border cursor-pointer transition ' +
+            (isChecked ? 'bg-teal-50/70 border-teal-400 text-slate-900' : 'bg-slate-50/60 border-slate-200 hover:bg-slate-100/70 text-slate-700') + '">' +
+              '<input id="' + checkId + '" type="checkbox" data-item-id="' + item.id + '" data-cp-text="' + escapeHtml(cp) + '" class="adl-cp-checkbox mt-0.5 rounded border-slate-300 text-teal-600 focus:ring-teal-500" ' + (isChecked ? 'checked' : '') + '>' +
+              '<span class="text-xs leading-relaxed">' + escapeHtml(cp) + '</span>' +
+            '</label>'
+          );
+        }).join('');
+
+        const levelsHtml = item.levels.map(function(lvl) {
+          const isActive = selectedScore === lvl.score;
+          const activeClass = isActive ? ('score-btn-active-' + lvl.score) : 'bg-white border-slate-200 hover:border-slate-300 text-slate-800';
+          return (
+            '<button type="button" data-score-item="' + item.id + '" data-score-val="' + lvl.score + '" class="adl-score-btn text-left rounded-xl border p-3 transition flex flex-col justify-between ' + activeClass + '">' +
+              '<div>' +
+                '<div class="flex items-center justify-between gap-2 mb-1">' +
+                  '<span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold ' +
+                  (lvl.score === 1 ? 'bg-emerald-600 text-white' : lvl.score === 2 ? 'bg-sky-600 text-white' : lvl.score === 3 ? 'bg-amber-600 text-white' : 'bg-rose-600 text-white') + '">' +
+                    lvl.score + '点' +
+                  '</span>' +
+                  (isActive ? '<span class="text-[11px] font-bold">✓ 選択中</span>' : '') +
+                '</div>' +
+                '<p class="text-xs font-bold leading-snug">' + escapeHtml(lvl.label) + '</p>' +
+                (state.showCriteria ? '<p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed print-expand">' + escapeHtml(lvl.desc) + '</p>' : '') +
+              '</div>' +
+            '</button>'
+          );
+        }).join('');
+
+        return (
+          '<article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden print-break-avoid">' +
+            '<div class="bg-slate-50 border-b border-slate-200 px-5 py-3.5 flex flex-wrap items-center justify-between gap-2">' +
+              '<div>' +
+                '<h3 class="text-base font-bold text-slate-900">' + escapeHtml(item.title) + '</h3>' +
+                '<p class="text-xs text-slate-600 mt-0.5">診断書定義：' + escapeHtml(item.definition) + '</p>' +
+              '</div>' +
+              '<div class="flex items-center gap-2">' +
+                (itemState.checked.length > 0 ? '<span class="px-2 py-0.5 rounded bg-teal-100 text-teal-800 text-xs font-semibold">支障該当 ' + itemState.checked.length + '件</span>' : '') +
+                statusBadge +
+              '</div>' +
+            '</div>' +
+
+            '<div class="p-5 space-y-4">' +
+              '<p class="text-xs text-amber-900 bg-amber-50 border border-amber-200/80 rounded-lg px-3 py-2">' +
+                escapeHtml(item.exclusionNote) +
+              '</p>' +
+
+              '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">' +
+                '<div class="rounded-xl bg-rose-50/50 border border-rose-200/70 p-3">' +
+                  '<p class="font-bold text-rose-900 mb-1">× 避けるべき浅い質問例</p>' +
+                  '<p class="text-slate-700 leading-relaxed">' + escapeHtml(item.ngQuestion) + '</p>' +
+                '</div>' +
+                '<div class="rounded-xl bg-teal-50/50 border border-teal-200/80 p-3">' +
+                  '<p class="font-bold text-teal-900 mb-1">○ 実態を引き出す深掘り質問フレーズ</p>' +
+                  '<p class="text-slate-800 font-medium leading-relaxed">' + escapeHtml(item.okQuestion) + '</p>' +
+                '</div>' +
+              '</div>' +
+
+              '<div>' +
+                '<p class="text-xs font-bold text-slate-800 mb-2">具体的な日常生活支障のヒアリングチェック項目（複数選択可）</p>' +
+                '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">' +
+                  checkpointsHtml +
+                '</div>' +
+              '</div>' +
+
+              '<div>' +
+                '<div class="flex items-center justify-between mb-2">' +
+                  '<p class="text-xs font-bold text-slate-800">4段階評価の選択（単身生活と仮定した場合の目安）</p>' +
+                  (selectedScore ? '<button type="button" data-clear-score="' + item.id + '" class="adl-clear-score text-[11px] text-slate-500 hover:text-rose-600 underline no-print">選択解除</button>' : '') +
+                '</div>' +
+                '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">' +
+                  levelsHtml +
+                '</div>' +
+              '</div>' +
+
+              '<div>' +
+                '<label for="memo_' + item.id + '" class="block text-xs font-bold text-slate-700 mb-1">具体的エピソード・頻度・援助者のメモ（申立書・主治医伝達用）</label>' +
+                '<textarea id="memo_' + item.id + '" data-memo-item="' + item.id + '" rows="2" placeholder="例：母が毎日3食用意しており、母不在時は1日中何も食べずベッドで寝ている。食器も自室に放置。" class="adl-memo-input w-full rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">' + escapeHtml(itemState.memo) + '</textarea>' +
+              '</div>' +
+            '</div>' +
+          '</article>'
+        );
+      });
+
+      container.innerHTML = htmlParts.join('');
+    }
+
+    function renderDegreeOptions() {
+      const container = document.getElementById('degreeOptionsContainer');
+      container.innerHTML = DEGREE_OPTIONS.map(function(opt) {
+        const isSelected = state.degree === opt.value;
+        return (
+          '<button type="button" data-degree-val="' + opt.value + '" class="degree-opt-btn w-full text-left rounded-xl border p-3.5 transition flex items-start gap-3 ' +
+          (isSelected ? 'bg-indigo-50/80 border-indigo-600 ring-2 ring-indigo-500/20' : 'bg-white border-slate-200 hover:bg-slate-50') + '">' +
+            '<span class="inline-flex items-center justify-center px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 mt-0.5 ' +
+            (isSelected ? 'bg-indigo-700 text-white' : 'bg-slate-100 text-slate-700') + '">' +
+              escapeHtml(opt.code) +
+            '</span>' +
+            '<div class="flex-1">' +
+              '<div class="flex items-center justify-between gap-2">' +
+                '<p class="text-xs sm:text-sm font-bold text-slate-900">' + escapeHtml(opt.title) + '</p>' +
+                (isSelected ? '<span class="text-xs font-bold text-indigo-700 shrink-0">✓ 選択中</span>' : '') +
+              '</div>' +
+              '<p class="text-xs text-slate-600 mt-1 leading-relaxed">' + escapeHtml(opt.detail) + '</p>' +
+            '</div>' +
+          '</button>'
+        );
+      }).join('');
+    }
+
+    function renderStickyAndGuideline() {
+      const m = calculateMetrics();
+
+      // Sticky bar updates
+      document.getElementById('statAnsweredCount').textContent = m.count + ' / 7 項目';
+      document.getElementById('statAverageScore').textContent = m.avg !== null ? m.avg.toFixed(2) + (m.count < 7 ? ' (暫定)' : '') : '—';
+      document.getElementById('statDegreeLabel').textContent = state.degree !== null ? '（' + state.degree + '）' : '未選択';
+
+      const badge = document.getElementById('statEstimateBadge');
+      if (m.formattedEstimate) {
+        badge.textContent = '目安: ' + m.formattedEstimate;
+        badge.className = m.isDiscrepancy
+          ? 'flex items-center gap-1.5 bg-amber-100 border border-amber-300 text-amber-950 rounded-lg px-3 py-1.5 font-bold'
+          : 'flex items-center gap-1.5 bg-teal-600 border border-teal-700 text-white rounded-lg px-3 py-1.5 font-bold';
+      } else {
+        badge.textContent = '目安: 評価選択で自動算出';
+        badge.className = 'flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-900 rounded-lg px-3 py-1.5 font-bold';
+      }
+
+      // Tab 2 top cards
+      document.getElementById('glAvgNumber').textContent = m.avg !== null ? m.avg.toFixed(2) : '—';
+      document.getElementById('glAvgSub').textContent = m.count === 7
+        ? '（全7項目入力済・合計 ' + m.sum + '点）'
+        : m.count > 0
+          ? '（7項目中 ' + m.count + '項目の暫定平均）'
+          : '（未入力）';
+
+      if (state.degree !== null) {
+        const dObj = DEGREE_OPTIONS[state.degree - 1];
+        document.getElementById('glDegreeNumber').textContent = dObj.code;
+        document.getElementById('glDegreeText').textContent = dObj.title;
+      } else {
+        document.getElementById('glDegreeNumber').textContent = '未選択';
+        document.getElementById('glDegreeText').textContent = 'タブ1の下部で（1）〜（5）を選択すると、下のマトリクス表で該当セルがハイライトされます。';
+      }
+
+      document.getElementById('glPensionBadge').textContent = state.pensionType === 'kousei' ? '障害厚生年金（1〜3級）' : '障害基礎年金（1〜2級）';
+      document.getElementById('glResultMain').textContent = m.formattedEstimate ? m.formattedEstimate : '評価を選択してください';
+      document.getElementById('glResultNote').textContent = m.isDiscrepancy
+        ? '「日常生活能力の判定」平均と「日常生活能力の程度」の組み合わせがガイドライン表の空欄箇所に該当しています。診断書⑪欄での具体的な補足説明が特に重要です。'
+        : '目安表は総合評価時の参考指標であり、実際の等級判定は病状・療養・生活環境・就労状況を含めて総合的に判断されます。';
+
+      // Matrix rows
+      const cols = [5, 4, 3, 2, 1];
+      const tbody = document.getElementById('guidelineMatrixBody');
+      tbody.innerHTML = GUIDELINE_MATRIX.map(function(row) {
+        const isRowMatch = m.rowIndex === row.rowIndex;
+        const tds = cols.map(function(c) {
+          const raw = row.cells[c];
+          const text = formatCellForPensionType(raw, state.pensionType);
+          const isExactCell = isRowMatch && state.degree === c;
+          let bgClass = 'bg-white text-slate-800';
+          if (!raw) bgClass = 'bg-slate-50 text-slate-400';
+          else if (raw.indexOf('1級') !== -1) bgClass = 'bg-rose-50/70 text-rose-950 font-semibold';
+          else if (raw === '2級') bgClass = 'bg-amber-50/80 text-amber-950 font-semibold';
+          else if (raw.indexOf('2級') !== -1) bgClass = 'bg-teal-50/70 text-teal-950 font-medium';
+
+          return (
+            '<td class="border border-slate-200 px-2 py-3 ' + bgClass + (isExactCell ? ' matrix-active-cell' : '') + '">' +
+              escapeHtml(text) +
+              (isExactCell ? '<div class="text-[10px] text-teal-900 font-bold mt-0.5">▲ 現在地</div>' : '') +
+            '</td>'
+          );
+        }).join('');
+
+        return (
+          '<tr class="' + (isRowMatch ? 'bg-teal-50/40' : '') + '">' +
+            '<th class="border border-slate-200 px-2.5 py-3 text-left font-semibold text-slate-800 bg-slate-50/80 whitespace-nowrap">' +
+              escapeHtml(row.label) +
+            '</th>' +
+            tds +
+          '</tr>'
+        );
+      }).join('');
+
+      renderSvgChart();
+      renderOutputText();
+    }
+
+    function renderSvgChart() {
+      const wrapper = document.getElementById('svgChartWrapper');
+      const width = 460;
+      const rowHeight = 40;
+      const topPad = 24;
+      const bottomPad = 28;
+      const leftPad = 148;
+      const rightPad = 46;
+      const chartW = width - leftPad - rightPad;
+      const height = topPad + ADL_ITEMS.length * rowHeight + bottomPad;
+
+      const colorMap = {
+        1: '#10b981',
+        2: '#0ea5e9',
+        3: '#f59e0b',
+        4: '#f43f5e'
+      };
+
+      let gridSvg = '';
+      for (let step = 0; step <= 4; step++) {
+        const x = leftPad + (chartW * step) / 4;
+        gridSvg += '<line x1="' + x + '" y1="' + topPad + '" x2="' + x + '" y2="' + (height - bottomPad) + '" stroke="#e2e8f0" stroke-width="1"/>';
+        if (step >= 1) {
+          gridSvg += '<text x="' + x + '" y="' + (height - 8) + '" text-anchor="middle" font-size="11" fill="#64748b">' + step + '点</text>';
+        }
+      }
+
+      const barsSvg = ADL_ITEMS.map(function(item, idx) {
+        const yCenter = topPad + idx * rowHeight + rowHeight / 2;
+        const score = state.items[item.id].score;
+        const barW = score ? (chartW * score) / 4 : 0;
+        const fill = score ? colorMap[score] : '#cbd5e1';
+        return (
+          '<g>' +
+            '<text x="' + (leftPad - 10) + '" y="' + (yCenter + 4) + '" text-anchor="end" font-size="12" font-weight="600" fill="#1e293b">' +
+              escapeHtml(item.code + item.shortName) +
+            '</text>' +
+            '<rect x="' + leftPad + '" y="' + (yCenter - 10) + '" width="' + chartW + '" height="20" rx="5" fill="#f1f5f9"/>' +
+            (score ? '<rect x="' + leftPad + '" y="' + (yCenter - 10) + '" width="' + barW + '" height="20" rx="5" fill="' + fill + '"/>' : '') +
+            '<text x="' + (leftPad + chartW + 8) + '" y="' + (yCenter + 4) + '" text-anchor="start" font-size="12" font-weight="700" fill="' + (score ? '#0f172a' : '#94a3b8') + '">' +
+              (score ? score + '点' : '—') +
+            '</text>' +
+          '</g>'
+        );
+      }).join('');
+
+      wrapper.innerHTML =
+        '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" role="img" aria-label="日常生活能力の判定7項目スコアグラフ">' +
+          gridSvg +
+          barsSvg +
+        '</svg>';
+    }
+
+    // =========================================================================
+    // Output Generators (Doctor Memo / PRehe / Client Questionnaire / Clean HTML)
+    // =========================================================================
+    function buildDoctorMemoText() {
+      const m = calculateMetrics();
+      const lines = [];
+      lines.push('【日常生活状況・就労状況に関するヒアリング整理メモ（主治医ご提出・診断書作成参考資料）】');
+      lines.push('※ご診察時の限られたお時間ではお伝えしきれない自宅での日常生活実態（単身生活と仮定した場合の支障および過去1年程度の状態変動）を整理いたしました。');
+      lines.push('');
+      if (state.profile.clientName) lines.push('■ 氏名：' + state.profile.clientName);
+      lines.push('■ 対象制度：' + (state.pensionType === 'kousei' ? '障害厚生年金' : '障害基礎年金'));
+      lines.push('■ 生活環境：' + state.profile.livingEnv + (state.profile.supporter ? '（主な援助者：' + state.profile.supporter + '）' : ''));
+      if (state.profile.bedridden) lines.push('■ 臥床頻度・体調の波：' + state.profile.bedridden);
+      lines.push('■ 現在の就労状況：' + state.profile.workStatus);
+      if (state.profile.welfare) lines.push('■ 福祉サービス・手帳：' + state.profile.welfare);
+      lines.push('■ 通院・同席状況：' + state.profile.accompany);
+      if (state.profile.envMemo) lines.push('■ 特記事項：' + state.profile.envMemo);
+      lines.push('');
+      lines.push('------------------------------------------------------------');
+      lines.push('■ 診断書裏面「2 日常生活能力の判定」（単身生活想定での聞き取り状況）');
+      ADL_ITEMS.forEach(function(item) {
+        const st = state.items[item.id];
+        const lvlObj = st.score ? item.levels[st.score - 1] : null;
+        lines.push('');
+        lines.push(item.title + ' ： ' + (lvlObj ? ('【' + st.score + '点：' + lvlObj.label + '】') : '【未選択】'));
+        if (st.checked.length > 0) {
+          st.checked.forEach(function(c) {
+            lines.push('  ・' + c);
+          });
+        }
+        if (st.memo.trim()) {
+          lines.push('  ［具体状況］' + st.memo.trim());
+        }
+        if (st.checked.length === 0 && !st.memo.trim()) {
+          lines.push('  ・（特記メモ未入力）');
+        }
+      });
+      lines.push('');
+      lines.push('------------------------------------------------------------');
+      lines.push('■ 診断書裏面「3 日常生活能力の程度」（包括評価の参考）');
+      if (state.degree) {
+        const d = DEGREE_OPTIONS[state.degree - 1];
+        lines.push('  ' + d.code + ' ' + d.title);
+      } else {
+        lines.push('  （未選択）');
+      }
+      lines.push('■ 等級判定ガイドライン計算参考値');
+      lines.push('  ・7項目判定平均：' + (m.avg !== null ? m.avg.toFixed(2) : '未算出') + ' （入力 ' + m.count + '/7項目）');
+      lines.push('  ・等級目安：' + (m.formattedEstimate || '未算出'));
+      return lines.join('\n');
+    }
+
+    function buildPreheText() {
+      const m = calculateMetrics();
+      const lines = [];
+      lines.push('[プリエ入力データ（日常生活能力ヒアリング抽出分）]');
+      lines.push('顧客氏名: ' + (state.profile.clientName || '（未入力）'));
+      lines.push('初診時年金種別: ' + (state.pensionType === 'kousei' ? '障害厚生' : '障害基礎'));
+      lines.push('現在の生活環境: ' + state.profile.livingEnv);
+      lines.push('主な援助者: ' + (state.profile.supporter || '（未入力）'));
+      lines.push('現在の就労区分: ' + state.profile.workStatus);
+      lines.push('福祉サービス・手帳: ' + (state.profile.welfare || 'なし'));
+      lines.push('');
+      lines.push('【日常生活能力の判定（参考値）】');
+      ADL_ITEMS.forEach(function(item) {
+        const s = state.items[item.id].score;
+        lines.push(item.preheKey + ': ' + (s !== null ? s : '未選択（1〜4）'));
+      });
+      lines.push('判定平均: ' + (m.avg !== null ? m.avg.toFixed(2) : '—'));
+      lines.push('日常生活能力の程度: ' + (state.degree !== null ? ('(' + state.degree + ')') : '未選択（1〜5）'));
+      lines.push('ガイドライン等級目安: ' + (m.formattedEstimate || '—'));
+      lines.push('');
+      lines.push('【項目別ヒアリング具体エピソード】');
+      ADL_ITEMS.forEach(function(item) {
+        const st = state.items[item.id];
+        if (st.checked.length > 0 || st.memo.trim()) {
+          const combined = st.checked.concat(st.memo.trim() ? [st.memo.trim()] : []).join(' ／ ');
+          lines.push('・' + item.shortName + ': ' + combined);
+        }
+      });
+      return lines.join('\n');
+    }
+
+    function buildClientQuestionnaireText() {
+      const lines = [];
+      lines.push('【障害年金申請（精神の障害）日常生活状況の事前確認アンケート】');
+      lines.push('診断書では「もしご家族等の援助がなく、お一人で暮らしたと仮定した場合にどのくらいできるか」および「過去1年間の体調の良い時・悪い時の波」を確認します。あてはまるものや具体的なご様子を教えてください。');
+      lines.push('');
+      lines.push('■ 基本の生活・体調の波について');
+      lines.push('1. 現在どなたと暮らしていますか？（一人暮らしの場合は、いつ・どのような理由で一人暮らしになり、誰からどんなサポートを受けていますか？）');
+      lines.push('2. 体調が悪く横になって過ごす日は「週に何日くらい」あり、一度崩れると「何日くらい」続きますか？');
+      lines.push('3. 現在のお仕事や障害福祉サービス（訪問看護・ヘルパー・A型/B型等）、職場で受けている配慮があれば教えてください。');
+      lines.push('');
+      ADL_ITEMS.forEach(function(item) {
+        lines.push('■ ' + item.title);
+        lines.push('  質問：' + item.okQuestion.replace(/^「|」$/g, ''));
+        item.checkpoints.slice(0, 5).forEach(function(cp) {
+          lines.push('  □ ' + cp);
+        });
+        lines.push('  自由記入：（　　　　　　　　　　　　　　　　　　　　）');
+        lines.push('');
+      });
+      return lines.join('\n');
+    }
+
+    function buildCleanHtmlSnippet() {
+      const rows = ADL_ITEMS.map(function(item) {
+        const lis = item.checkpoints.map(function(cp) {
+          return '          <li>' + escapeHtml(cp) + '</li>';
+        }).join('\n');
+        return [
+          '    <section class="hearing-card">',
+          '      <h2>' + escapeHtml(item.title) + '</h2>',
+          '      <p class="definition"><strong>診断書定義：</strong>' + escapeHtml(item.definition) + '</p>',
+          '      <p class="question"><strong>深掘り質問例：</strong>' + escapeHtml(item.okQuestion) + '</p>',
+          '      <ul>',
+          lis,
+          '      </ul>',
+          '    </section>'
+        ].join('\n');
+      }).join('\n\n');
+
+      return [
+        '<!DOCTYPE html>',
+        '<html lang="ja">',
+        '<head>',
+        '  <meta charset="UTF-8">',
+        '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        '  <title>精神疾患向け 障害年金・日常生活ヒアリング項目一覧</title>',
+        '  <style>',
+        '    body { font-family: "Noto Sans JP", sans-serif; line-height: 1.7; color: #1e293b; max-width: 900px; margin: 0 auto; padding: 24px; background: #f8fafc; }',
+        '    h1 { font-size: 1.5rem; border-bottom: 3px solid #0f766e; padding-bottom: 8px; }',
+        '    .hearing-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }',
+        '    .hearing-card h2 { margin-top: 0; font-size: 1.15rem; color: #0f766e; }',
+        '    .definition, .question { font-size: 0.92rem; margin: 6px 0; }',
+        '    ul { margin: 8px 0 0; padding-left: 20px; font-size: 0.9rem; }',
+        '  </style>',
+        '</head>',
+        '<body>',
+        '  <h1>障害年金（精神の障害用）日常生活ヒアリング7項目一覧</h1>',
+        '  <p>※判断にあたっては「単身で生活するとしたら可能かどうか」および「過去1年程度の好転・増悪の波」を基準に聴取します。</p>',
+        rows,
+        '</body>',
+        '</html>'
+      ].join('\n');
+    }
+
+    function renderOutputText() {
+      const textarea = document.getElementById('outputTextarea');
+      if (state.exportFormat === 'doctor') {
+        textarea.value = buildDoctorMemoText();
+      } else if (state.exportFormat === 'prehe') {
+        textarea.value = buildPreheText();
+      } else if (state.exportFormat === 'questionnaire') {
+        textarea.value = buildClientQuestionnaireText();
+      } else {
+        textarea.value = buildCleanHtmlSnippet();
+      }
+
+      document.querySelectorAll('.fmt-btn').forEach(function(btn) {
+        const isCurrent = btn.getAttribute('data-fmt') === state.exportFormat;
+        btn.className = isCurrent
+          ? 'fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-teal-50 border-teal-600 text-teal-900'
+          : 'fmt-btn px-3 py-1.5 rounded-lg text-xs font-semibold border transition bg-white border-slate-300 text-slate-700 hover:bg-slate-50';
+      });
+    }
+
+    function switchTab(tabName) {
+      state.activeTab = tabName;
+      ['hearing', 'guideline', 'export'].forEach(function(t) {
+        const sec = document.getElementById('view-' + t);
+        if (t === tabName) sec.classList.remove('hidden');
+        else sec.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab-nav-btn').forEach(function(btn) {
+        const isCurrent = btn.getAttribute('data-tab') === tabName;
+        btn.className = isCurrent
+          ? 'tab-nav-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-teal-800 shadow-sm'
+          : 'tab-nav-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600 hover:text-slate-900';
+      });
+      renderStickyAndGuideline();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function loadSampleData() {
+      state.pensionType = 'kousei';
+      state.profile = {
+        clientName: '記入例（うつ病・30代会社員・休職中）',
+        livingEnv: '在宅（同居あり）',
+        supporter: '母と同居（炊事・洗濯・通院送迎・薬管理全般）',
+        bedridden: '週4日は1日の大半をベッドで臥床、悪化すると3〜5日動けない',
+        workStatus: '休職中（傷病手当金受給等）',
+        welfare: '精神障害者保健福祉手帳2級',
+        accompany: '家族が毎回または時々同席',
+        envMemo: '薬の副作用と集中力低下により医師から自動車運転禁止指示あり'
+      };
+      state.items[1] = {
+        score: 3,
+        checked: [
+          '献立・調理・配膳・後片付けをすべて同居家族や施設に頼っている',
+          '意欲低下で空腹でも準備ができず、1日1食以下や抜食になる日がある'
+        ],
+        memo: '母が3食とも準備して自室まで運んでいる。母が不在の日中はゼリー飲料のみで過ごす。'
+      };
+      state.items[2] = {
+        score: 3,
+        checked: [
+          '入浴・シャワーが週1〜2回以下（または数日〜1週間以上入れない）',
+          '家族から再三の声かけや湯張り等の準備がないと入浴できない',
+          '自室の掃除や片付けが自発的にできず、ゴミや物が散乱している'
+        ],
+        memo: '母に促されて週2回やっとシャワーを浴びる程度。自室の掃除は全くできない。'
+      };
+      state.items[3] = {
+        score: 3,
+        checked: [
+          '通帳・キャッシュカード・財布を家族が管理し、数日分ずつ手渡しされている',
+          'スーパー等の人混み・レジ待ち・音や光で体調が悪化し一人で買い物に行けない'
+        ],
+        memo: 'スーパーの照明と人混みで動悸がするため単独での買い出しは不可。通帳も母が管理。'
+      };
+      state.items[4] = {
+        score: 3,
+        checked: [
+          '一人では外出・移動できず家族等の送迎や付き添いがないと通院できない',
+          'お薬カレンダーやピルケースへの仕分け・服薬確認を家族や訪問看護が行っている',
+          '診察室で緊張や思考制止が起こり、自分の病状や副作用を主治医に伝えられない'
+        ],
+        memo: '月2回の通院は母が車で送迎し診察室にも同席。お薬カレンダーで母が毎食後確認している。'
+      };
+      state.items[5] = {
+        score: 3,
+        checked: [
+          '同居家族や医療・福祉関係者以外との交流がほとんどなく社会的に孤立している',
+          '電話の着信・LINE通知・インターホンに強い恐怖や不安があり応答できない'
+        ],
+        memo: '休職以降、友人や職場からの連絡に一切出られず、自宅のインターホンも恐怖で応答不可。'
+      };
+      state.items[6] = {
+        score: 2,
+        checked: [
+          '注意力低下・ふらつき・薬の副作用等により自動車の運転を医師から止められている',
+          '地震・火災・急病・交通トラブルなど非日常の事態でパニックになり固まってしまう'
+        ],
+        memo: '処方薬による強い眠気と注意力低下で運転禁止。急な予定変更があるとパニックになる。'
+      };
+      state.items[7] = {
+        score: 3,
+        checked: [
+          '市役所・年金事務所・ハローワーク等の行政手続きや申請書類の記入が一人でできない',
+          '役所や金融機関からの重要郵便物を開封・確認できず放置してしまう'
+        ],
+        memo: '傷病手当金や自立支援医療の更新書類も自力で読めず、すべて母が手続きを代行。'
+      };
+      state.degree = 4;
+
+      saveState();
+      syncProfileInputs();
+      renderAdlCards();
+      renderDegreeOptions();
+      renderStickyAndGuideline();
+      showToast('記入例データを読み込みました（判定平均 2.86 / 程度(4) → 目安：2級）');
+    }
+
+    // =========================================================================
+    // Event Wiring
+    // =========================================================================
+    function bindEvents() {
+      // Top navigation tabs
+      document.querySelectorAll('.tab-nav-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          switchTab(btn.getAttribute('data-tab'));
+        });
+      });
+
+      document.getElementById('btnGoGuideline').addEventListener('click', function() {
+        switchTab('guideline');
+      });
+      document.getElementById('btnGoExport').addEventListener('click', function() {
+        switchTab('export');
+      });
+
+      // Pension type toggle
+      document.getElementById('btnTypeKousei').addEventListener('click', function() {
+        state.pensionType = 'kousei';
+        saveState();
+        syncProfileInputs();
+        renderStickyAndGuideline();
+      });
+      document.getElementById('btnTypeKiso').addEventListener('click', function() {
+        state.pensionType = 'kiso';
+        saveState();
+        syncProfileInputs();
+        renderStickyAndGuideline();
+      });
+
+      // Profile fields
+      const profileBindings = [
+        ['inputClientName', 'clientName'],
+        ['selectLivingEnv', 'livingEnv'],
+        ['inputSupporter', 'supporter'],
+        ['inputBedridden', 'bedridden'],
+        ['selectWorkStatus', 'workStatus'],
+        ['inputWelfare', 'welfare'],
+        ['selectAccompany', 'accompany'],
+        ['inputEnvMemo', 'envMemo']
+      ];
+      profileBindings.forEach(function(pair) {
+        const el = document.getElementById(pair[0]);
+        const key = pair[1];
+        el.addEventListener('input', function() {
+          state.profile[key] = el.value;
+          saveState();
+          renderOutputText();
+        });
+        el.addEventListener('change', function() {
+          state.profile[key] = el.value;
+          saveState();
+          renderOutputText();
+        });
+      });
+
+      // Search & Toggle Criteria
+      document.getElementById('inputSearchItems').addEventListener('input', function(e) {
+        state.searchQuery = e.target.value;
+        renderAdlCards();
+      });
+      document.getElementById('btnToggleCriteria').addEventListener('click', function() {
+        state.showCriteria = !state.showCriteria;
+        saveState();
+        syncProfileInputs();
+        renderAdlCards();
+      });
+
+      // Delegated events inside ADL cards container
+      const adlContainer = document.getElementById('adlItemsContainer');
+      adlContainer.addEventListener('click', function(e) {
+        const scoreBtn = e.target.closest('.adl-score-btn');
+        if (scoreBtn) {
+          const itemId = Number(scoreBtn.getAttribute('data-score-item'));
+          const val = Number(scoreBtn.getAttribute('data-score-val'));
+          state.items[itemId].score = state.items[itemId].score === val ? null : val;
+          saveState();
+          renderAdlCards();
+          renderStickyAndGuideline();
+          return;
+        }
+        const clearBtn = e.target.closest('.adl-clear-score');
+        if (clearBtn) {
+          const itemId = Number(clearBtn.getAttribute('data-clear-score'));
+          state.items[itemId].score = null;
+          saveState();
+          renderAdlCards();
+          renderStickyAndGuideline();
+        }
+      });
+
+      adlContainer.addEventListener('change', function(e) {
+        if (e.target.classList.contains('adl-cp-checkbox')) {
+          const itemId = Number(e.target.getAttribute('data-item-id'));
+          const cpText = e.target.getAttribute('data-cp-text');
+          const list = state.items[itemId].checked;
+          const idx = list.indexOf(cpText);
+          if (e.target.checked && idx === -1) {
+            list.push(cpText);
+          } else if (!e.target.checked && idx !== -1) {
+            list.splice(idx, 1);
+          }
+          saveState();
+          renderAdlCards();
+          renderStickyAndGuideline();
+        }
+      });
+
+      adlContainer.addEventListener('input', function(e) {
+        if (e.target.classList.contains('adl-memo-input')) {
+          const itemId = Number(e.target.getAttribute('data-memo-item'));
+          state.items[itemId].memo = e.target.value;
+          saveState();
+          renderOutputText();
+        }
+      });
+
+      // Delegated events for Degree 1..5
+      document.getElementById('degreeOptionsContainer').addEventListener('click', function(e) {
+        const btn = e.target.closest('.degree-opt-btn');
+        if (!btn) return;
+        const val = Number(btn.getAttribute('data-degree-val'));
+        state.degree = state.degree === val ? null : val;
+        saveState();
+        renderDegreeOptions();
+        renderStickyAndGuideline();
+      });
+
+      // Output format sub-tabs
+      document.querySelectorAll('.fmt-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          state.exportFormat = btn.getAttribute('data-fmt');
+          renderOutputText();
+        });
+      });
+
+      // Copy button with execCommand fallback
+      document.getElementById('btnCopyOutput').addEventListener('click', function() {
+        const textarea = document.getElementById('outputTextarea');
+        const text = textarea.value;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() {
+            showToast('クリップボードにコピーしました');
+          }).catch(function() {
+            textarea.select();
+            document.execCommand('copy');
+            showToast('クリップボードにコピーしました');
+          });
+        } else {
+          textarea.select();
+          document.execCommand('copy');
+          showToast('クリップボードにコピーしました');
+        }
+      });
+
+      // Sample, Reset modal, Print
+      document.getElementById('btnLoadSample').addEventListener('click', loadSampleData);
+
+      const modal = document.getElementById('resetModal');
+      document.getElementById('btnOpenReset').addEventListener('click', function() {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      });
+      document.getElementById('btnCancelReset').addEventListener('click', function() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      });
+      document.getElementById('btnConfirmReset').addEventListener('click', function() {
+        state = createEmptyState();
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        document.getElementById('inputSearchItems').value = '';
+        syncProfileInputs();
+        renderAdlCards();
+        renderDegreeOptions();
+        renderStickyAndGuideline();
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        showToast('入力内容をクリアしました');
+      });
+
+      document.getElementById('btnPrint').addEventListener('click', function() {
+        window.print();
+      });
+    }
+
+    // Initialize App
+    loadSavedState();
+    syncProfileInputs();
+    renderAdlCards();
+    renderDegreeOptions();
+    renderStickyAndGuideline();
+    bindEvents();
+  </script>
+</body>
+</html>
